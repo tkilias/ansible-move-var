@@ -1,0 +1,6 @@
+---
+- name: "lvm kram" # not done yet
+  inlcude: lvm.yml
+
+- name: "Copy and mount of var to newvar"
+  include: sync_and_mount.yml

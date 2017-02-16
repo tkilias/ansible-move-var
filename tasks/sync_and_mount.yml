@@ -1,0 +1,24 @@
+---
+- name: "Create newvar Directory"
+  file: /mnt/newvar
+    state: directory
+
+- name: "Mount newvar"
+  mount:
+    path: /mnt/newvar
+    src: /dev/sdx
+    fstype: ext4
+    state: mounted
+
+- name: "Stop services"
+  include: services_stop.yml
+
+- name: "Sync var to newvar"
+  synchronize:
+    src: /var
+    dest: /mnt/newvar
+
+- name: "unmount newvar"
+  mount:
+    path: /mnt/newvar
+    state: unmounted

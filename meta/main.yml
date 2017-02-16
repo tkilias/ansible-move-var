@@ -1,0 +1,16 @@
+galaxy_info:
+    author: elouin
+    description: moving var directory
+    company:
+
+    license: Apache
+
+    min_ansible_version: 2.2
+
+    platforms:
+        - name: CentOS
+          versions:
+              - 6
+              - 7
+
+    dependencies: []

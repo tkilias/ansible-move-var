@@ -1,0 +1,9 @@
+---
+- name: "Stop Services"
+  systemd:
+    name: {{ item }}
+    state: stopped
+    with_items:
+      - docker
+      - smartd
+      - fail2ban

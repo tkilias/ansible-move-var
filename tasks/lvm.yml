@@ -1,0 +1,23 @@
+---
+lvm_groups:
+  - vgname: var
+    disks: 
+      - /dev/sdm1
+      - /dev/sdn1
+    create: true
+    lvnames:
+      - lvname: var
+        size: 10g
+        resize: yes
+        resizefs: yes
+        create: true
+        lvmoptions:
+          disks: 
+            - /dev/sde1
+            - /dev/sdf1
+          type: "raid1"
+          mirrors: 1
+        filesystem: ext4
+        mount: true
+        mntp: /var
+manage_lvm: true
