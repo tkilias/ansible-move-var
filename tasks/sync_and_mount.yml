@@ -10,9 +10,6 @@
     fstype: ext4
     state: mounted
 
-- name: "Stop services"
-  include: services_stop.yml
-
 - name: "Sync var to newvar"
   synchronize:
     src: /var
