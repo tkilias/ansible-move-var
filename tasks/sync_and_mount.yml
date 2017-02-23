@@ -14,8 +14,17 @@
   synchronize:
     src: /var
     dest: /mnt/newvar
+    perms: yes
+    delegate_to: {{ inventory_host }}
 
 - name: "unmount newvar"
   mount:
     path: /mnt/newvar
     state: unmounted
+
+- name: "fstab newvar"
+  mount:
+    path: /var
+    src: /dev/sdx
+    fstype: ext4 
+    state: present
