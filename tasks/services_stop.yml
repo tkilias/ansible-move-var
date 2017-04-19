@@ -3,7 +3,4 @@
   systemd:
     name: {{ item }}
     state: stopped
-    with_items:
-      - docker
-      - smartd
-      - fail2ban
+    with_items: "{{ services_to_stop }}"
