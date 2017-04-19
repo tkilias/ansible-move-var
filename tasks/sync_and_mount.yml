@@ -1,30 +1,31 @@
 ---
-- name: "Create newvar Directory"
-  file: /mnt/newvar
+- name: "create temp dir"
+  tempfile:
     state: directory
+  register: tempdir
 
-- name: "Mount newvar"
+- name: "mount {{ target_device }} to {{ tempdir.path }}"
   mount:
-    path: /mnt/newvar
-    src: /dev/sdx
+    path: "{{ tempdir.path }}"
+    src: "{{ target_device }}"
     fstype: ext4
     state: mounted
 
-- name: "Sync var to newvar"
+- name: "sync {{ directory_to_move }} to {{ tempdir.path }}"
   synchronize:
-    src: /var
-    dest: /mnt/newvar
+    src: "{{ directory_to_move }}"
+    dest: "{{ tempdir.path }}"
     perms: yes
     delegate_to: {{ inventory_host }}
 
-- name: "unmount newvar"
+- name: "unmount {{ target_device }} from {{ tempdir.path }}"
   mount:
-    path: /mnt/newvar
+    path: "{{ tempdir.path }}"
     state: unmounted
 
-- name: "fstab newvar"
+- name: "Add {{ target_device }} to {{ directory_to_move }} in fstab"
   mount:
-    path: /var
-    src: /dev/sdx
+    path: "{{ directory_to_move }}"
+    src: "{{ target_device }}"
     fstype: ext4 
     state: present
