@@ -1,0 +1,6 @@
+---
+- name: "Start Services"
+  systemd:
+    name: {{ item }}
+    state: started
+    with_items: "{{ services_to_stop }}"

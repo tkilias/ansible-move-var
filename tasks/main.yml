@@ -4,3 +4,6 @@
 
 - name: "Copy and mount {{ directory_to_move }}"
   include: sync_and_mount.yml
+  
+- name: "Start stopped services"
+  include: services_start.yml
